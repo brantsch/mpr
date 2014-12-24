@@ -1,0 +1,35 @@
+#!/bin/sh
+if [ "$MPRHOST" == "" ]; then
+	echo "ERROR: must set MPRHOST variable to \"host:port\"!"
+	exit 1
+fi
+
+function show_help() {
+echo "USAGE: $0 {rate|get|help}
+$0
+$0 help
+	Show this help message.
+$0 get
+	Get the rating for the currently playing song.
+"
+}
+
+op="$1" # the operation to execute
+
+case "$op" in
+	"rate")
+		rating="$2" #the rating to set for the currently playing song
+		wget -O /dev/null "$MPRHOST/addNewRating?rating=$rating"
+		;;
+	"get") # get the rating of the track which is currently playing
+		wget -q -O - "$MPRHOST/getCurrent"
+		;;
+	"") # show help
+		show_help
+		exit 0
+		;;
+	*)
+		echo "Operation $op is not defined!"
+		exit 1
+		;;
+esac
