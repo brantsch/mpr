@@ -9,9 +9,8 @@ HOST = ""
 
 def rate(newrating):
     """ Rate the currently playing song. """
-    if (newrating > 0 and newrating <= 5):
-        request = requests.get('http://' + HOST + "/addNewRating", params={'rating' : newrating})
-        print("made request with rating " + str(newrating))
+    request = requests.get('http://' + HOST + "/addNewRating", params={'rating' : newrating})
+    print("made request with rating " + str(newrating))
 
 def show():
     """ Show the rating for the currently playing song. """
