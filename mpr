@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ "$MPRHOST" == "" ]; then
 	echo "ERROR: must set MPRHOST variable to \"host:port\"!"
 	exit 1
@@ -24,7 +24,8 @@ case "$op" in
 	"get") # get the rating of the track which is currently playing
 		wget -q -O - "$MPRHOST/getCurrent"
 		;;
-	"") # show help
+	"") ;& # show help
+	"help")
 		show_help
 		exit 0
 		;;
