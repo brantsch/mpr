@@ -21,8 +21,10 @@ def show():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('operation', type=str, choices=['get','rate'])
-    parser.add_argument('rating', type=int, nargs='?', default=None)
+    subparsers = parser.add_subparsers(dest="operation") # subcommand name will be stored in the "operation" attribute of the namespace returned by parse_args
+    get_subp = subparsers.add_parser('get',help="Get ratings for songs.")
+    rate_subp = subparsers.add_parser('rate',help="Rate songs.")
+    rate_subp.add_argument('rating', type=int, help="The rating to submit.")
     parser.add_argument('--host', type=str, action="store", default="localhost:5000", help='The host of the mpr service. Format: "host:port" ')
     args = parser.parse_args()
 
