@@ -23,8 +23,11 @@ def show_list(count):
     """ Show a list of <count> best ratings. """
     request = requests.get("http://" + HOST + "/getRatinglist",params={"maxResults" : count})
     json = request.json()
-    strings = ["\n".join(["{}: {}".format(key,repr(value)) for key, value in obj.items()]) for obj in json]
-    print(("-"*20).join(strings))
+    strings = []
+    for obj in json:
+        pairs = ["{}: {}".format(key,repr(value)) for key, value in obj.items()]
+        strings.append("\n".join(pairs))
+    print(("\n"+"-"*30+"\n").join(strings))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
