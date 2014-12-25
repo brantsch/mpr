@@ -22,6 +22,7 @@ def show():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="operation") # subcommand name will be stored in the "operation" attribute of the namespace returned by parse_args
+    subparsers.required = True # subcommand _must_ be given
     get_subp = subparsers.add_parser('get',help="Get ratings for songs.")
     rate_subp = subparsers.add_parser('rate',help="Rate songs.")
     rate_subp.add_argument('rating', type=int, help="The rating to submit.")
